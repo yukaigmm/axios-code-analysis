@@ -5,7 +5,8 @@
   "main": "axios.js",
   "scripts": {
     "build": "webpack --hot --config webpack.config.js",
-    "dev": "webpack-dev-server"
+    "dev": "webpack-dev-server",
+    "push": "git pull && git add . && git commit -m 更新笔记 && git push"
   },
   "keywords": [],
   "author": "",

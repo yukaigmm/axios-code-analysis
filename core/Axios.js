@@ -7,9 +7,9 @@ var dispatchRequest = require('./dispatchRequest');
 var mergeConfig = require('./mergeConfig');
 
 /**
- * Create a new instance of Axios
+ * 创建Axios构造函数
  *
- * @param {Object} instanceConfig The default config for the instance
+ * @param {Object} instanceConfig 构造函数实例化的默认配置
  */
 function Axios(instanceConfig) {
   this.defaults = instanceConfig;
