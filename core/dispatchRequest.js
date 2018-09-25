@@ -21,21 +21,25 @@ function throwIfCancellationRequested(config) {
  *
  * @param {object} config The config that is to be used for the request
  * @returns {Promise} The Promise to be fulfilled
+ * 根据配置发起请求，配置主要包括
+ * config = {
+ *  baseURL,
+ *  url,
+ *  headers,
+ *  data,
+ *  transformRequest,
+ *  transformResponse
+ *  adapter
+ * }
+ * 请求需要的配置 header，data
  */
 module.exports = function dispatchRequest(config) {
   throwIfCancellationRequested(config);
   /**
-   * config = {
-   *  baseURL,
-   *  url,
-   *  headers,
-   *  data,
-   *  transformRequest,
-   *  transformResponse
-   *  adapter
-   * }
+   
    */
   // Support baseURL config
+  // 如果有baseUrl，而且Url不是绝对路径的，就把baseURl和url拼起来
   if (config.baseURL && !isAbsoluteURL(config.url)) {
     config.url = combineURLs(config.baseURL, config.url);
   }

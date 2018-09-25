@@ -13,14 +13,14 @@ function setContentTypeIfUnset(headers, value) {
   }
 }
 
+// 定义node环境下和浏览器环境下的请求发生器；
+// node环境下有process变量，因此在有process变量的情况下，使用http；
+// 否则就是浏览器环境，那就使用xhr
 function getDefaultAdapter() {
   var adapter;
-  // Only Node.JS has a process variable that is of [[Class]] process
   if (typeof process !== 'undefined' && Object.prototype.toString.call(process) === '[object process]') {
-    // For node use HTTP adapter
     adapter = require('./adapters/http');
   } else if (typeof XMLHttpRequest !== 'undefined') {
-    // For browsers use XHR adapter
     adapter = require('./adapters/xhr');
   }
   return adapter;
@@ -29,9 +29,12 @@ function getDefaultAdapter() {
 var defaults = {
   adapter: getDefaultAdapter(),
 
+  // 根据传入的data和header，处理发送请求的请求头的配置和请求主体
   transformRequest: [function transformRequest(data, headers) {
+    // 处理传入的header字段大小写有误的情况
     normalizeHeaderName(headers, 'Accept');
     normalizeHeaderName(headers, 'Content-Type');
+    // 根据data的类型，处理成想要发送的请求主体部分，如果需要修改请求头的就修改请求头
     if (utils.isFormData(data) ||
       utils.isArrayBuffer(data) ||
       utils.isBuffer(data) ||

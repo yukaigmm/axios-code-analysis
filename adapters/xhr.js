@@ -22,6 +22,7 @@ module.exports = function xhrAdapter(config) {
     if (config.auth) {
       var username = config.auth.username || '';
       var password = config.auth.password || '';
+      // btoa ：从 String 对象中创建一个 base-64 编码的 ASCII 字符串，其中字符串中的每个字符都被视为一个二进制数据字节。
       requestHeaders.Authorization = 'Basic ' + btoa(username + ':' + password);
     }
 
